@@ -590,6 +590,196 @@
         pointer-events: none;
         z-index: 9;
       }
+      .cover-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        padding: 20px;
+        overflow: auto;
+        background:
+          radial-gradient(ellipse at 14% 8%, rgba(255, 67, 164, 0.21), transparent 32rem),
+          radial-gradient(ellipse at 90% 84%, rgba(142, 85, 223, 0.17), transparent 30rem),
+          #08060d;
+        transition: opacity 0.75s ease;
+      }
+      .cover-screen[hidden] {
+        display: none;
+      }
+      .cover-screen.opening {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .cover-card {
+        position: relative;
+        isolation: isolate;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: min(100%, 430px);
+        height: min(700px, calc(100svh - 48px));
+        min-height: min(500px, calc(100svh - 40px));
+        box-sizing: border-box;
+        overflow: hidden;
+        padding: 34px 26px 30px;
+        border: 1px solid rgba(255, 104, 182, 0.4);
+        border-radius: 30px;
+        background:
+          radial-gradient(circle at 50% 39%, rgba(255, 69, 164, 0.13), transparent 40%),
+          linear-gradient(145deg, #160d1c, #0e0a16 54%, #170d20);
+        box-shadow:
+          0 0 0 1px rgba(255, 104, 182, 0.08),
+          0 0 48px rgba(255, 63, 157, 0.17),
+          0 34px 100px rgba(0, 0, 0, 0.62);
+        text-align: center;
+        transition: transform 0.75s cubic-bezier(0.2, 0.75, 0.2, 1), opacity 0.6s ease;
+      }
+      .cover-card::before,
+      .cover-card::after {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        border: 1px solid rgba(255, 116, 190, 0.13);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .cover-card::before {
+        width: 340px;
+        height: 340px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 0 24px rgba(255, 83, 172, 0.025), 0 0 0 58px rgba(151, 103, 227, 0.03);
+      }
+      .cover-card::after {
+        inset: 11px;
+        border-radius: 21px;
+        border-color: rgba(197, 145, 255, 0.12);
+      }
+      .cover-screen.opening .cover-card {
+        opacity: 0;
+        transform: perspective(1200px) rotateY(-12deg) rotateX(4deg) scale(0.94);
+      }
+      .cover-index,
+      .cover-art,
+      .cover-copy,
+      .cover-open,
+      .cover-sign {
+        position: relative;
+        z-index: 1;
+      }
+      .cover-index,
+      .cover-k {
+        color: #e5b8d1;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+      .cover-index {
+        align-self: flex-start;
+        opacity: 0.72;
+      }
+      .cover-art {
+        color: #ff75bb;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 19px;
+        line-height: 1;
+        letter-spacing: 0.32em;
+        text-shadow: 0 0 20px rgba(255, 75, 166, 0.55);
+      }
+      .cover-art span:nth-child(2) {
+        display: inline-block;
+        padding: 0 5px;
+        font-size: 54px;
+        vertical-align: -10px;
+      }
+      .cover-copy {
+        margin: auto 0;
+      }
+      .cover-k {
+        margin: 0 0 15px;
+        color: #df9fc3;
+      }
+      .cover-title {
+        margin: 0;
+        color: var(--fg);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(30px, 8vw, 40px);
+        line-height: 1.06;
+      }
+      .cover-name {
+        margin: 2px 0 0;
+        background: linear-gradient(120deg, #ff93c9, #ff4fa8 54%, #c591ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 18px rgba(255, 74, 167, 0.23));
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(58px, 14vw, 78px);
+        font-weight: 500;
+        letter-spacing: -0.035em;
+        line-height: 1;
+      }
+      .cover-subtitle {
+        margin: 10px 0 0;
+        color: #d2b4c8;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 23px;
+        font-style: italic;
+      }
+      .cover-open {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        width: 100%;
+        min-height: 56px;
+        box-sizing: border-box;
+        padding: 12px 20px;
+        border: 1px solid rgba(255, 208, 232, 0.45);
+        border-radius: 999px;
+        background: linear-gradient(110deg, #ff68b4, #ed45a2 64%, #c591ff);
+        box-shadow: 0 0 27px rgba(255, 74, 167, 0.25);
+        color: #180814;
+        font: 700 14px "DM Sans", system-ui, sans-serif;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .cover-open:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 36px rgba(255, 74, 167, 0.42);
+      }
+      .cover-open span:last-child {
+        font-size: 19px;
+      }
+      .cover-sign {
+        margin: 15px 0 0;
+        color: #b99bb0;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+      @media (max-height: 560px) {
+        .cover-card {
+          height: calc(100svh - 36px);
+          min-height: 0;
+          padding: 18px 24px;
+          border-radius: 24px;
+        }
+        .cover-art span:nth-child(2) {
+          font-size: 42px;
+        }
+        .cover-subtitle {
+          margin-top: 4px;
+          font-size: 19px;
+        }
+        .cover-open {
+          min-height: 48px;
+        }
+      }
       .sky {
         position: relative;
         max-width: 440px;
@@ -714,6 +904,32 @@
   <body>
     <canvas id="cf" aria-hidden="true"></canvas>
 
+    <div
+      class="cover-screen"
+      id="cover"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cover-title"
+    >
+      <div class="cover-card">
+        <div class="cover-index">A little birthday surprise</div>
+        <div class="cover-art" aria-hidden="true">✧ <span>♡</span> ✧</div>
+        <div class="cover-copy">
+          <p class="cover-k">Made with all my love</p>
+          <h1 class="cover-title" id="cover-title">Happy Birthday,</h1>
+          <p class="cover-name" data-n>Mahima</p>
+          <p class="cover-subtitle">my sweet butterfly</p>
+        </div>
+        <div>
+          <button class="cover-open" id="open-cover" type="button">
+            <span>Open your birthday card</span><span aria-hidden="true">↗</span>
+          </button>
+          <p class="cover-sign">A little world, made just for you · Raj</p>
+        </div>
+      </div>
+    </div>
+
+    <main id="page" inert>
     <section class="hero" id="top">
       <div id="hs" aria-hidden="true"></div>
       <div class="k">For my sweet butterfly</div>
@@ -931,6 +1147,7 @@
     <footer>
       For my sweet butterfly, <span data-n>Mahima</span> · with all my love, Raj
     </footer>
+    </main>
 
     <script>
       var C = {
@@ -1043,9 +1260,22 @@
           "s";
         hs.appendChild(s);
       }
-      setTimeout(function () {
-        burst(innerWidth / 2, innerHeight * 0.4, 120);
-      }, 600);
+      var cover = $("#cover"),
+        page = $("#page"),
+        coverButton = $("#open-cover"),
+        coverDelay = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? 0
+          : 760;
+      coverButton.onclick = function () {
+        page.removeAttribute("inert");
+        cover.classList.add("opening");
+        coverButton.disabled = true;
+        setTimeout(function () {
+          cover.hidden = true;
+          $("#go").focus({ preventScroll: true });
+          burst(innerWidth / 2, innerHeight * 0.4, 150);
+        }, coverDelay);
+      };
       $("#go").onclick = function (e) {
         burst(e.clientX, e.clientY, 100);
         setTimeout(function () {
